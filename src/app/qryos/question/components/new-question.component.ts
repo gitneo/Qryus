@@ -1,4 +1,6 @@
-import {Component} from "@angular/core";
+import {Component, ElementRef, ViewChild} from "@angular/core";
+import {AbstractQuestionService} from "../classes/abstract-question.service";
+import {Question} from "../interface/question";
 
 @Component({
   selector:'qryus-question',
@@ -10,15 +12,8 @@ import {Component} from "@angular/core";
           <div class="col-sm-6">
             <h1>Ask Question</h1>
           </div>
-          <!--              <div class="col-sm-6">-->
-          <!--                <ol class="breadcrumb float-sm-right">-->
-          <!--                  <li class="breadcrumb-item"><a href="#">Home</a></li>-->
-          <!--                  <li class="breadcrumb-item"><a href="#">Layout</a></li>-->
-          <!--                  <li class="breadcrumb-item active">Fixed Layout</li>-->
-          <!--                </ol>-->
-          <!--              </div>-->
         </div>
-      </div><!-- /.container-fluid -->
+      </div>
     </section>
 
     <div class="row">
@@ -28,7 +23,7 @@ import {Component} from "@angular/core";
             <div class="card-body">
               <div class="form-group">
                 <label for="exampleInputEmail1">Title</label>
-                <input type="text" class="form-control" placeholder="Enter Title">
+                <input type="text" class="form-control" placeholder="Enter Title" #titleOfQuestion>
               </div>
             </div>
           </form>
@@ -42,7 +37,7 @@ import {Component} from "@angular/core";
       <div class="row">
         <div class="col-md-9">
             <!-- /.card-header -->
-              <textarea id="summernote">
+              <textarea id="summernote"  #bodyOfQuestion>
                 Place <em>some</em> <u>text</u> <strong>here</strong>
               </textarea>
         </div>
@@ -90,7 +85,7 @@ import {Component} from "@angular/core";
         <div class="card elevation-0">
           <div class="card-body row">
             <div class="col-md-12">
-              <button type="button" class="btn bg-maroon">Submit Question</button>
+              <button type="button" class="btn bg-maroon" (click)="saveQuestion()">Submit Question</button>
             </div>
           </div>
         </div>
@@ -101,4 +96,19 @@ import {Component} from "@angular/core";
 
   `
 })
-export class NewQuestionComponent {}
+export class NewQuestionComponent {
+
+  @ViewChild("titleOfQuestion") title: ElementRef | undefined;
+  @ViewChild("bodyOfQuestion")  body: ElementRef | undefined;
+
+  constructor(private questionService: AbstractQuestionService) {}
+
+  saveQuestion(){
+    let question: Question = {
+      title:this.title?.nativeElement.value,
+      body:this.body?.nativeElement.value,
+      user:{id:'xxx', name:'OgoOkafor',pic:'xxx' },
+    }
+    this.questionService.save(question);
+  }
+}
