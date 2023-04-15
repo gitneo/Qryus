@@ -2,25 +2,22 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
 import { AppComponent } from './app.component';
-import {TemplateComponent} from "./qryos/common/template.component";
-import {QuestionListComponent} from "./qryos/question/question-list.component";
-import {NewQuestionComponent} from "./qryos/question/new-question.component";
 import {AppRoutingModule} from "./app-routing.module";
-import {QuestionDetailsComponent} from "./qryos/question/question-details.component";
 import {DashboardComponent} from "./qryos/dashboard/dashboard.component";
+import {QuestionModule} from "./qryos/question/question.module";
+import {SharedModule} from "./qryos/shared/shared.module";
+import {HttpClientModule} from "@angular/common/http";
 
 @NgModule({
   declarations: [
     AppComponent,
-    DashboardComponent,
-    TemplateComponent,
-    QuestionListComponent,
-    NewQuestionComponent,
-    QuestionDetailsComponent
+    DashboardComponent
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    QuestionModule,
+    SharedModule
   ],
   providers: [],
   bootstrap: [AppComponent]

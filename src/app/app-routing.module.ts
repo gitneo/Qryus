@@ -1,8 +1,8 @@
 import {NgModule} from "@angular/core";
 import {Route, Router, RouterModule} from "@angular/router";
-import {QuestionListComponent} from "./qryos/question/question-list.component";
-import {NewQuestionComponent} from "./qryos/question/new-question.component";
-import {QuestionDetailsComponent} from "./qryos/question/question-details.component";
+import {QuestionListComponent} from "./qryos/question/components/question-list.component";
+import {NewQuestionComponent} from "./qryos/question/components/new-question.component";
+import {QuestionDetailsComponent} from "./qryos/question/components/question-details.component";
 import {DashboardComponent} from "./qryos/dashboard/dashboard.component";
 
 
